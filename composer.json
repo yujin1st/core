@@ -24,14 +24,14 @@
     "yiisoft/yii2": "~2.0",
     "yiisoft/yii2-bootstrap": "~2.0",
     "yiisoft/yii2-jui": "~2.0",
-    "yujin1st/yii2-user": "1.0.x-dev",
-    "yujin1st/inspinia-theme": "dev-master"
-  },
-  "require-dev": {
-    "yiisoft/yii2-gii": "*",
     "kartik-v/yii2-widgets": "*",
     "kartik-v/yii2-icons": "dev-master",
-    "kartik-v/yii2-helpers": "*"
+    "kartik-v/yii2-helpers": "*",
+    "yujin1st/yii2-user": "1.0.x-dev",
+    "yujin1st/inspinia-theme": "1.0.x-dev"
+  },
+  "require-dev": {
+    "yiisoft/yii2-gii": "*"
   },
   "autoload": {
     "psr-4": {
