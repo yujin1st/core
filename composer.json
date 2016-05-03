@@ -27,8 +27,8 @@
     "kartik-v/yii2-widgets": "*",
     "kartik-v/yii2-icons": "dev-master",
     "kartik-v/yii2-helpers": "*",
-    "yujin1st/yii2-user": "1.0.x-dev",
-    "yujin1st/inspinia-theme": "1.0.x-dev"
+    "yujin1st/yii2-user": "@dev",
+    "yujin1st/inspinia-theme": "@dev"
   },
   "require-dev": {
     "yiisoft/yii2-gii": "*"
