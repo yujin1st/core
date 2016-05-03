@@ -23,15 +23,29 @@ use yujin1st\core\events\BuildMenuEvent;
  */
 class Module extends yii\base\Module
 {
-
-  static $moduleTitle = 'Ядро';
-  public $webEnd;
-  public $controllerNamespace = 'modules\core\controllers\\';
-
-  const VERSION = '0.0.1-dev';
+  const TITLE = 'Ядро';
+  const VERSION = '0.0.2-dev';
 
   const EVENT_BUILD_MENU = 'buildMenu';
 
+  public $webEnd;
+
+  public $controllerNamespace = 'modules\core\controllers\\';
+
+  /**
+   * Set global layout
+   *
+   * @var bool
+   */
+  public $setGlobalLayout = false;
+  /**
+   * additional modules§
+   *
+   * @var array
+   */
+  public $appModules = [
+
+  ];
 
   /**
    * @inheritdoc
@@ -60,9 +74,16 @@ class Module extends yii\base\Module
    */
   public function bootstrap() {
     if (!$this->webEnd) throw new InvalidConfigException('Module\'s webEnd property must be configured');
+    if ($this->setGlobalLayout) Yii::$app->setLayoutPath('@yujin1st/core/views/' . $this->webEnd . '/layouts');
     $this->controllerNamespace = '@yujin1st\core\controllers\\' . $this->webEnd;
     $this->setViewPath('@yujin1st/core/views/' . $this->webEnd);
     $this->registerUrl();
+
+    // loading additional modules
+    foreach ($this->appModules as $module => $config) {
+      Yii::$app->setModule($module, $config);
+      Yii::$app->getModule($module);
+    }
   }
 
   /**
@@ -70,7 +91,7 @@ class Module extends yii\base\Module
    */
   public function getMenu() {
     $event = new BuildMenuEvent();
-    Yii::$app->getModule('user')->trigger(Module::EVENT_BUILD_MENU, $event);
+    Yii::$app->getModule('core')->trigger(Module::EVENT_BUILD_MENU, $event);
     return $event->items;
   }
 }

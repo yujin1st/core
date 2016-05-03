@@ -50,7 +50,7 @@ class BuildMenuEvent extends Event
   }
 
   /**
-   * @return array
+   * @return mixed|null
    */
   public function getItems() {
     return $this->_items;
