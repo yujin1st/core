@@ -16,7 +16,7 @@ namespace yujin1st\core\components;
  *
  * @package yujin1st\core\components
  */
-class Module extends \yujin1st\core\Module
+class Module extends \yii\base\Module
 {
 
 }
