@@ -74,7 +74,7 @@ class Module extends yii\base\Module
    */
   public function bootstrap() {
     if (!$this->webEnd) throw new InvalidConfigException('Module\'s webEnd property must be configured');
-    if ($this->setGlobalLayout) Yii::$app->setLayoutPath('@yujin1st/core/views/' . $this->webEnd . '/layouts');
+    if ($this->setGlobalLayout) Yii::$app->setLayoutPath('@yujin1st/core/views/layouts');
     $this->controllerNamespace = '@yujin1st\core\controllers\\' . $this->webEnd;
     $this->setViewPath('@yujin1st/core/views/' . $this->webEnd);
     $this->registerUrl();
