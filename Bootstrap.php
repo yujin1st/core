@@ -25,9 +25,6 @@ class Bootstrap implements BootstrapInterface
 
   /** @inheritdoc */
   public function bootstrap($app) {
-    /** @var Module $module */
-    if ($app->hasModule('core') && ($module = $app->getModule('core')) instanceof Module) {
-      $module->bootstrap();
-    }
+    // initialization placed in module
   }
 }
