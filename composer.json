@@ -34,11 +34,11 @@
   },
   "autoload": {
     "psr-4": {
-      "yujin1st\\user\\": ""
+      "yujin1st\\core\\": ""
     }
   },
   "extra": {
-    "bootstrap": "yujin1st\\user\\Bootstrap",
+    "bootstrap": "yujin1st\\core\\Bootstrap",
     "branch-alias": {
       "dev-master": "1.0.x-dev"
     },

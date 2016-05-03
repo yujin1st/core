@@ -50,7 +50,7 @@ AppAsset::register($this);
   <?= $this->render('_sidebar') ?>
 
   <div id="page-wrapper" class="gray-bg">
-    <?= $this->render('_header2') ?>
+    <?= $this->render('_header') ?>
 
     <div class="row wrapper border-bottom white-bg page-heading">
       <div class="col-sm-8">

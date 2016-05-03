@@ -22,7 +22,7 @@ use yii\helpers\ArrayHelper;
 class BuildMenuEvent extends Event
 {
   /** @var array */
-  private $_items;
+  private $_items = [];
 
   /**
    *
@@ -45,8 +45,15 @@ class BuildMenuEvent extends Event
    * @param $name
    * @return mixed|null
    */
-  public function getItems($name) {
+  public function getItem($name) {
     return isset($this->_items[$name]) ? $this->_items[$name] : null;
+  }
+
+  /**
+   * @return array
+   */
+  public function getItems() {
+    return $this->_items;
   }
 
 }
