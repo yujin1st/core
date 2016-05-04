@@ -44,8 +44,14 @@ use yujin1st\inspiniatheme\components\NavBar;
     'encodeLabels' => false,
     'items' => [
       [
-        'label' => '<i class="fa fa-sign-out"></i>' . Yii::t('app', 'Log out'),
+        'label' => '<i class="fa fa-sign-in"></i> Войти',
+        'url' => ['/user/security/login'],
+        'visible' => Yii::$app->user->isGuest
+      ],
+      [
+        'label' => '<i class="fa fa-sign-out"></i> Выйти',
         'url' => ['/user/security/logout'],
+        'visible' => !Yii::$app->user->isGuest
       ],
     ],
   ]); ?>
