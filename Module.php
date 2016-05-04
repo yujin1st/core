@@ -56,11 +56,6 @@ class Module extends yii\base\Module
   }
 
 
-  /** @var array The rules to be used in URL management. */
-  public $urlRules = [
-  ];
-
-
   /**
    * @inheritdoc
    */
@@ -82,8 +77,8 @@ class Module extends yii\base\Module
 
     // loading additional modules
     foreach ($this->appModules as $module => $config) {
-      Yii::$app->setModule($module, $config);
-      Yii::$app->getModule($module);
+      //Yii::$app->setModule($module, $config);
+      //Yii::$app->getModule($module);
     }
   }
 
@@ -92,7 +87,7 @@ class Module extends yii\base\Module
    */
   public function getMenu() {
     $event = new BuildMenuEvent();
-    Yii::$app->getModule('core')->trigger(Module::EVENT_BUILD_MENU, $event);
+    $this->trigger(self::EVENT_BUILD_MENU, $event);
     return $event->items;
   }
 }
