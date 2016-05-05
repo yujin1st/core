@@ -38,6 +38,8 @@ class Module extends yii\base\Module
    * @var bool
    */
   public $setGlobalLayout = false;
+  public $globalLayoutPath = '@yujin1st/core/views/layouts';
+  public $globalLayout = 'single';
   /**
    * additional modules§
    *
@@ -70,7 +72,10 @@ class Module extends yii\base\Module
    */
   public function bootstrap() {
     if (!$this->webEnd) throw new InvalidConfigException('Module\'s webEnd property must be configured');
-    if ($this->setGlobalLayout) Yii::$app->setLayoutPath('@yujin1st/core/views/layouts');
+    if ($this->setGlobalLayout) {
+      Yii::$app->setLayoutPath($this->globalLayoutPath);
+      Yii::$app->layout = $this->globalLayout;
+    }
     $this->controllerNamespace = '@yujin1st\core\controllers\\' . $this->webEnd;
     $this->setViewPath('@yujin1st/core/views/' . $this->webEnd);
     $this->registerUrl();
