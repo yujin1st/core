@@ -9,11 +9,6 @@
  *   
  */
 
-/**
- * @author Evgeniy Bobrov <yujin1st@gmail.com>
- * @link http://yujin1st.ru
- */
-
 
 /* @var $this \yii\web\View */
 /* @var $content string */
@@ -68,9 +63,7 @@ AppAsset::register($this);
       </div>
     </div>
 
-    <div class="wrapper wrapper-content">
-      <?= $content ?>
-    </div>
+    <?= $content ?>
 
     <div class="footer">
       <div class="pull-right">

@@ -38,7 +38,6 @@ use yujin1st\inspiniatheme\components\NavBar;
     'items' => [
     ],
   ]); ?>
-
   <?= Nav::widget([
     'options' => ['class' => 'nav navbar-top-links navbar-right'],
     'encodeLabels' => false,
@@ -48,8 +47,15 @@ use yujin1st\inspiniatheme\components\NavBar;
         'url' => ['/user/security/login'],
         'visible' => Yii::$app->user->isGuest
       ],
+
       [
-        'label' => '<i class="fa fa-sign-out"></i> Выйти',
+        /** @noinspection PhpUndefinedFieldInspection */
+        'label' => (!Yii::$app->user->isGuest ? (Yii::$app->user->identity->username) : ''),
+        'visible' => !Yii::$app->user->isGuest
+      ],
+
+      [
+        'label' => ' <i class="fa fa-sign-out"></i> Выйти',
         'url' => ['/user/security/logout'],
         'visible' => !Yii::$app->user->isGuest
       ],

@@ -18,11 +18,29 @@ use yii\helpers\ArrayHelper;
  * Event for gathering menu for backend over other modules
  *
  * @property array $items
+ * @property array $header
  */
 class BuildMenuEvent extends Event
 {
   /** @var array */
   private $_items = [];
+  /** @var  array header element */
+
+  private $_header;
+
+  /**
+   * @param $header
+   */
+  public function setHeader($header) {
+    $this->_header = $header;
+  }
+
+  /**
+   * @return array
+   */
+  public function getHeader() {
+    return $this->_header;
+  }
 
   /**
    *

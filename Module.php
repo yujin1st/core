@@ -76,7 +76,7 @@ class Module extends yii\base\Module
       Yii::$app->setLayoutPath($this->globalLayoutPath);
       Yii::$app->layout = $this->globalLayout;
     }
-    $this->controllerNamespace = '@yujin1st\core\controllers\\' . $this->webEnd;
+    $this->controllerNamespace = 'yujin1st\core\controllers\\' . $this->webEnd;
     $this->setViewPath('@yujin1st/core/views/' . $this->webEnd);
     $this->registerUrl();
 
@@ -93,6 +93,14 @@ class Module extends yii\base\Module
   public function getMenu() {
     $event = new BuildMenuEvent();
     $this->trigger(self::EVENT_BUILD_MENU, $event);
-    return $event->items;
+    $menu = [];
+    if ($event->header) $menu[] = $event->header;
+    foreach ($event->items as $block => $items) {
+      foreach ($items as $item) {
+        $menu[] = $item;
+      }
+    }
+
+    return $menu;
   }
 }
