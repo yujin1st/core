@@ -13,7 +13,7 @@ namespace yujin1st\core;
 
 use yii;
 use yii\base\InvalidConfigException;
-use yujin1st\core\events\BuildMenuEvent;
+use yujin1st\core\modules\mmanager\helpers\Manager;
 
 /**
  * This is the main module class for Core
@@ -23,31 +23,39 @@ use yujin1st\core\events\BuildMenuEvent;
  */
 class Module extends yii\base\Module
 {
-  const TITLE = 'Ядро';
-  const VERSION = '0.0.2-dev';
-
-  const EVENT_BUILD_MENU = 'buildMenu';
+  public $version = 'Ядро';
+  public $name = '0.1.0-dev';
 
   public $webEnd;
 
-  public $controllerNamespace = 'modules\core\controllers\\';
-
   /**
-   * Set global layout
-   *
-   * @var bool
-   */
-  public $setGlobalLayout = false;
-  public $globalLayoutPath = '@yujin1st/core/views/layouts';
-  public $globalLayout = 'single';
-  /**
-   * additional modules§
+   * Core modules that should be run anyway
    *
    * @var array
    */
-  public $appModules = [
-
+  private $_coreModules = [
+    'mmanager' => [
+      'class' => 'yujin1st\core\modules\mmanager\Module',
+    ],
+    'backend' => [
+      'class' => 'yujin1st\core\modules\backend\Module',
+    ]
   ];
+
+  /**
+   * User defined Core modules properties
+   *
+   * @var array
+   */
+  public $coreModules = [];
+
+  /**
+   * Application Modules that should be run besides mmanager
+   *
+   * @var array
+   */
+  public $appModules = [];
+
 
   /**
    * @inheritdoc
@@ -59,48 +67,38 @@ class Module extends yii\base\Module
 
 
   /**
-   * @inheritdoc
+   * Register core modules as app module
    */
-  public function registerUrl() {
-    Yii::$app->urlManager->addRules([
-    ], false);
+  public function registerCoreModules() {
+    $modules = yii\helpers\ArrayHelper::merge($this->_coreModules, $this->coreModules);
+    Manager::registerModules($modules, [
+      'webEnd' => $this->webEnd,
+    ]);
   }
 
+  /**
+   * Register core modules as app module
+   */
+  public function registerAppModules() {
+    if (Yii::$app->hasModule('mmanager')) {
+      /** @var \yujin1st\core\modules\mmanager\Module $manager */
+      $manager = Yii::$app->getModule('mmanager');
+      $manager->registerModules($this->appModules);
+    } else {
+      Manager::registerModules($this->appModules, [
+        'webEnd' => $this->webEnd,
+      ]);
+    }
+  }
 
   /**
    * bootstrapping component
    */
   public function bootstrap() {
     if (!$this->webEnd) throw new InvalidConfigException('Module\'s webEnd property must be configured');
-    if ($this->setGlobalLayout) {
-      Yii::$app->setLayoutPath($this->globalLayoutPath);
-      Yii::$app->layout = $this->globalLayout;
-    }
-    $this->controllerNamespace = 'yujin1st\core\controllers\\' . $this->webEnd;
-    $this->setViewPath('@yujin1st/core/views/' . $this->webEnd);
-    $this->registerUrl();
-
-    // loading additional modules
-    foreach ($this->appModules as $module => $config) {
-      //Yii::$app->setModule($module, $config);
-      //Yii::$app->getModule($module);
-    }
+    $this->registerCoreModules();
+    $this->registerAppModules();
   }
 
-  /**
-   * Collecting side menu over modules
-   */
-  public function getMenu() {
-    $event = new BuildMenuEvent();
-    $this->trigger(self::EVENT_BUILD_MENU, $event);
-    $menu = [];
-    if ($event->header) $menu[] = $event->header;
-    foreach ($event->items as $block => $items) {
-      foreach ($items as $item) {
-        $menu[] = $item;
-      }
-    }
 
-    return $menu;
-  }
 }

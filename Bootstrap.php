@@ -8,7 +8,7 @@
  * @link http://yujin1st.ru
  *   
  */
- 
+
 
 namespace yujin1st\core;
 

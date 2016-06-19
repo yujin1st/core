@@ -9,7 +9,7 @@
  *   
  */
 
-namespace yujin1st\core\events;
+namespace yujin1st\core\modules\backend\events;
 
 use yii\base\Event;
 use yii\helpers\ArrayHelper;
