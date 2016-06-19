@@ -59,7 +59,7 @@ class Module extends \yujin1st\core\components\Module
   }
 
   /**
-   *
+   * @inheritdoc
    */
   public function init() {
     parent::init();
@@ -69,6 +69,7 @@ class Module extends \yujin1st\core\components\Module
       Yii::$app->layout = $this->globalLayout;
     }
 
-
+    $this->controllerNamespace = 'yujin1st\core\modules\backend\controllers\\' . $this->webEnd;
+    $this->setViewPath('@yujin1st/core/modules/backend/views/' . $this->webEnd);
   }
 }

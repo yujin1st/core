@@ -37,7 +37,18 @@ class Module extends \yujin1st\core\components\Module
     Manager::registerModules($modules, [
       'webEnd' => $this->webEnd,
     ]);
+  }
 
+  /**
+   * @inheritdoc
+   */
+  public function init() {
+    parent::init();
+
+    $this->controllerNamespace = 'yujin1st\core\modules\mmanager\controllers\\' . $this->webEnd;
+
+    $this->setViewPath('@yujin1st/core/modules/mmanager/views/' . $this->webEnd);
 
   }
+
 }
