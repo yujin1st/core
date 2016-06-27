@@ -34,6 +34,9 @@ class Module extends yii\base\Module
    * @var array
    */
   private $_coreModules = [
+    'msettings' => [
+      'class' => 'yujin1st\core\modules\settings\Module',
+    ],
     'mmanager' => [
       'class' => 'yujin1st\core\modules\mmanager\Module',
     ],
