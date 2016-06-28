@@ -6,7 +6,7 @@
  *
  * @author Evgeniy Bobrov <yujin1st@gmail.com>
  * @link http://yujin1st.ru
- *   
+ *
  */
 
 namespace yujin1st\core\modules\settings\components;
@@ -22,6 +22,7 @@ class Settings extends Component
   const CORE = 'core';
 
   /**
+   * @param $module
    * @param $key
    * @param bool $create
    * @return Setting
@@ -29,7 +30,8 @@ class Settings extends Component
   public function getModel($module, $key, $create = true) {
     $model = Setting::find()->mk($module, $key)->one();
     if (!$model && $create) {
-      $model = \Yii::createObject(Setting::className(), [
+      $model = \Yii::createObject([
+        'class' => Setting::className(),
         'module' => $module,
         'key' => $key,
       ]);
@@ -40,7 +42,7 @@ class Settings extends Component
   /**
    * Get parameter
    *
-   * @param $modul
+   * @param $module
    * @param $key
    * @param null $defaultValue
    * @return null
@@ -54,6 +56,7 @@ class Settings extends Component
   /**
    * Save parameter
    *
+   * @param $module
    * @param $key
    * @param $value
    */

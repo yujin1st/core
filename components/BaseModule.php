@@ -6,7 +6,7 @@
  *
  * @author Evgeniy Bobrov <yujin1st@gmail.com>
  * @link http://yujin1st.ru
- *   
+ *
  */
 
 namespace yujin1st\core\components;
@@ -38,4 +38,39 @@ class BaseModule extends \yii\base\Module
   public function init() {
   }
 
+  /**
+   * Module params
+   *
+   * @return array
+   */
+  public function getEditableParams() {
+    return [];
+  }
+
+  /**
+   * Module params labels
+   *
+   * @return array
+   */
+  public function getParamsLabels() {
+    return [];
+  }
+
+  /**
+   * @param $key
+   * @param $defaultValue
+   * @return mixed
+   */
+  public function getParam($key, $defaultValue) {
+    return \Yii::$app->settings->get($this->id, $key, $defaultValue);
+  }
+
+  /**
+   * @param $key
+   * @param $value
+   * @return mixed
+   */
+  public function setParam($key, $value) {
+    return \Yii::$app->settings->set($this->id, $key, $value);
+  }
 }

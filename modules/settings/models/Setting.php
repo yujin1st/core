@@ -6,7 +6,7 @@
  *
  * @author Evgeniy Bobrov <yujin1st@gmail.com>
  * @link http://yujin1st.ru
- *   
+ *
  */
 
 /**
@@ -17,7 +17,6 @@
 
 namespace yujin1st\core\modules\settings\models;
 
-use yii;
 use yii\db\ActiveRecord;
 use yujin1st\core\modules\settings\models\query\SettingQuery;
 
@@ -25,6 +24,7 @@ use yujin1st\core\modules\settings\models\query\SettingQuery;
  * This is the model class for table "settings".
  *
  * @property integer $id
+ * @property string $module
  * @property string $key
  * @property string $value
  */
@@ -39,7 +39,7 @@ class Setting extends ActiveRecord
    * @inheritdoc
    */
   public static function tableName() {
-    return 'settings';
+    return '{{%setting}}';
   }
 
 
@@ -49,6 +49,13 @@ class Setting extends ActiveRecord
    */
   public static function find() {
     return new SettingQuery(get_called_class());
+  }
+
+  /**
+   * @return array
+   */
+  public static function primaryKey() {
+    return ['module', 'key'];
   }
 
 
