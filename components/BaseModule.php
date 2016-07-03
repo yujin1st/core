@@ -61,7 +61,8 @@ class BaseModule extends \yii\base\Module
    * @param $defaultValue
    * @return mixed
    */
-  public function getParam($key, $defaultValue) {
+  public function getParam($key, $defaultValue = '') {
+    /** @noinspection PhpUndefinedFieldInspection */
     return \Yii::$app->settings->get($this->id, $key, $defaultValue);
   }
 
@@ -71,6 +72,7 @@ class BaseModule extends \yii\base\Module
    * @return mixed
    */
   public function setParam($key, $value) {
+    /** @noinspection PhpUndefinedFieldInspection */
     return \Yii::$app->settings->set($this->id, $key, $value);
   }
 }
