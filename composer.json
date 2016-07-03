@@ -26,6 +26,8 @@
     "kartik-v/yii2-widgets": "*",
     "kartik-v/yii2-icons": "dev-master",
     "kartik-v/yii2-helpers": "*",
+    "wbraganca/yii2-fancytree-widget": "*",
+    "creocoder/yii2-nested-sets": "0.9.*",
     "yujin1st/yii2-user": "@dev",
     "yujin1st/inspinia-theme": "~1.0"
   },
