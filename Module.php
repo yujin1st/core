@@ -24,7 +24,7 @@ use yujin1st\core\modules\mmanager\helpers\Manager;
 class Module extends yii\base\Module
 {
   public $version = 'Ядро';
-  public $name = '0.1.0-dev';
+  public $name = '2.0.4';
 
   public $webEnd;
 
