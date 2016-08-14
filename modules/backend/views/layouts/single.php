@@ -16,6 +16,9 @@
 <?php $this->beginContent('@yujin1st/core/modules/backend/views/layouts/main.php'); ?>
 
 <div class="wrapper wrapper-content">
+
+  <?= \yujin1st\core\modules\backend\widgets\Alert::widget() ?>
+
   <div class="ibox">
     <div class="ibox-content">
       <?= $content ?>
