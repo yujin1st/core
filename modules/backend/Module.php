@@ -6,7 +6,7 @@
  *
  * @author Evgeniy Bobrov <yujin1st@gmail.com>
  * @link http://yujin1st.ru
- *   
+ *
  */
 
 namespace yujin1st\core\modules\backend;
@@ -69,7 +69,11 @@ class Module extends \yujin1st\core\components\Module
       Yii::$app->layout = $this->globalLayout;
     }
 
-    $this->controllerNamespace = 'yujin1st\core\modules\backend\controllers\\' . $this->webEnd;
-    $this->setViewPath('@yujin1st/core/modules/backend/views/' . $this->webEnd);
+    if ($this->webEnd != 'console') {
+      Yii::$app->errorHandler->errorAction = '/backend/site/error';
+    }
+
+    $this->controllerNamespace = 'yujin1st\core\modules\backend\controllers';
+    $this->setViewPath('@yujin1st/core/modules/backend/views');
   }
 }
