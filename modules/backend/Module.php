@@ -22,7 +22,7 @@ use yujin1st\core\modules\backend\events\BuildMenuEvent;
  */
 class Module extends \yujin1st\core\components\Module
 {
-  public $version = '0.1';
+  public $version = '0.2';
   public $name = 'Панель администратор';
 
   /* Module properties
