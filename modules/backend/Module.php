@@ -69,7 +69,7 @@ class Module extends \yujin1st\core\components\Module
       Yii::$app->layout = $this->globalLayout;
     }
 
-    if ($this->webEnd != 'console') {
+    if ($this->webEnd == 'backend') {
       Yii::$app->errorHandler->errorAction = '/backend/site/error';
     }
 
