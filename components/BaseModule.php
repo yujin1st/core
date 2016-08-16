@@ -11,6 +11,9 @@
 
 namespace yujin1st\core\components;
 
+use yii\helpers\ArrayHelper;
+use yujin1st\core\events\RenderEvent;
+
 /**
  * Base class for application modules
  * Don't use this class directly, use yujin1st\core\components\Module
@@ -23,6 +26,9 @@ class BaseModule extends \yii\base\Module
   public $version;
   public $name;
   public $webEnd;
+
+  /** Event for render additional content */
+  const EVENT_RENDER = 'moduleRender';
 
   /**
    *
@@ -75,4 +81,33 @@ class BaseModule extends \yii\base\Module
     /** @noinspection PhpUndefinedFieldInspection */
     return \Yii::$app->settings->set($this->id, $key, $value);
   }
+
+
+  public function render($view, $params) {
+    $event = \Yii::createObject([
+      'class' => RenderEvent::className(),
+      'webEnd' => $this->webEnd,
+      'view' => $view,
+      'form' => ArrayHelper::remove($params, 'form'),
+      'model' => ArrayHelper::remove($params, 'model'),
+      'params' => $params,
+    ]);
+    $this->trigger(self::EVENT_RENDER, $event);
+    return $event->getRendered();
+  }
+
+  /**
+   * @param $webEnd string
+   * @param $view string
+   * @param $function \Closure
+   */
+  public function setRenderEventHandler($webEnd, $eventView, $view, $params = []) {
+    $this->on(self::EVENT_RENDER, function ($event) use ($webEnd, $eventView, $view, $params) {
+      /** @var $event RenderEvent */
+      if ($event->webEnd == $webEnd && $event->view == $eventView) {
+        $event->addRender($view, $params);
+      }
+    });
+  }
+
 }

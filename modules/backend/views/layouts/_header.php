@@ -44,7 +44,7 @@ use yujin1st\inspiniatheme\components\NavBar;
     'items' => [
       [
         'label' => '<i class="fa fa-sign-in"></i> Войти',
-        'url' => ['/user/security/login'],
+        'url' => ['/users/security/login'],
         'visible' => Yii::$app->user->isGuest
       ],
 
@@ -56,7 +56,7 @@ use yujin1st\inspiniatheme\components\NavBar;
 
       [
         'label' => ' <i class="fa fa-sign-out"></i> Выйти',
-        'url' => ['/user/security/logout'],
+        'url' => ['/users/security/logout'],
         'visible' => !Yii::$app->user->isGuest
       ],
     ],
